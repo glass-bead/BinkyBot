@@ -20,6 +20,11 @@ for (const file of commandFiles) {
     }
 }
 
+// Global variables
+global.newRole = "";
+global.welcomeChannel = "";
+
+
 /* ======================================================== */
 
 // Bot login
@@ -46,6 +51,11 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // New user joins the server
+client.on('guildMemberAdd', async (member) => {
+    client.commands.get('welcome').execute(member);
+    member.roles.add(member.guild.roles.cache.get('1065039145480765460'));
+    console.log(`${member.user.username} joined the server.`);
+});
 
 // Notice that a member has joined a voice chat
 
